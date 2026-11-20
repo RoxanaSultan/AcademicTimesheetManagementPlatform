@@ -1,0 +1,136 @@
+<div class="container my-4 calendar-container">
+  <h3 class="mb-4">Generare declarație</h3>
+
+  <form [formGroup]="filterForm" class="row g-3 align-items-center mb-3">
+    <div class="row align-items-end">
+      <div class="col-auto">
+        <label for="startDate" class="form-label">De la:</label>
+        <input
+          id="startDate"
+          type="date"
+          class="form-control"
+          placeholder="dd.mm.yyyy"
+          [formControl]="startDateControl"
+          [disabled]="status === 'Validat'"
+          (change)="onDateChange()"
+        />
+      </div>
+
+      <div class="col-auto">
+        <label for="endDate" class="form-label">Până la:</label>
+        <input
+          id="endDate"
+          type="date"
+          class="form-control"
+          placeholder="dd.mm.yyyy"
+          [formControl]="endDateControl"
+          [disabled]="status === 'Validat'"
+          (change)="onDateChange()"
+        />
+      </div>
+
+      <div class="col-auto">
+        <i
+          class="bi bi-arrow-clockwise fs-4 text-dark"
+          style="cursor: pointer;"
+          title="Resetează Calendar"
+          (click)="resetCalendar()"
+          role="button"
+          tabindex="0"
+          (keydown.enter)="resetCalendar()"
+          (keydown.space)="resetCalendar()"
+        ></i>
+      </div>
+    </div>
+
+
+    <br><div *ngIf="filterForm.errors?.['dateRangeInvalid'] && (startDateControl.value && endDateControl.value)">
+        <p style="color: red;">Data de sfârșit nu poate fi anterioară datei de început.</p>
+    </div><br>
+
+
+    <div class="col-auto d-flex align-items-end">
+      <button
+        type="button"
+        class="btn btn-primary me-2"
+        (click)="generateCalendar()"
+        [disabled]="!filterForm.valid || !startDateControl.value || !endDateControl.value">
+        Generare Calendar
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-success me-2"
+        (click)="validateCalendar()"
+        title="Generează calendarul înainte de validare"
+        [disabled]="!calendarGenerated || status === 'Validat'">
+        Validează Calendar
+      </button>
+
+      <button 
+        type="button" 
+        class="btn btn-secondary me-2" 
+        (click)="generatePdf()" 
+        [disabled]="!calendarValidated">
+        Generează PO - PDF
+      </button>
+
+      <button 
+        type="button" 
+        class="btn btn-secondary me-2" 
+        (click)="generateExcel()"
+        [disabled]="!calendarValidated || loading">
+        Generează PO - EXCEL
+      </button>
+
+    </div>
+
+    <div class="w-100 d-flex justify-content-end mt-2">
+      <span>
+        {{ status === 'Validat' ? '✅ Validat' : '🔧 În editare' }}
+      </span>
+    </div>
+  </form>
+
+  <div *ngIf="calendarData.length > 0" class="table-responsive">
+    <table class="table table-striped table-bordered align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th>Data</th>
+          <th>Zi săptămână</th>
+          <th>Zi lucrătoare</th>
+          <th>Par / Împar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let day of calendarData">
+          <td>{{ day.date | date:'dd.MM.yyyy' }}</td>
+          <td>{{ day.dayOfWeek }}</td>
+          <td>
+            <select
+              class="form-select form-select-sm"
+              [(ngModel)]="day.workDayStatus"
+              (ngModelChange)="onWorkDayChange(day, $event)"
+              [disabled]="status === 'Validat'"
+            >
+              <option value="">--</option>
+              <option value="Zi lucratoare">Zi lucratoare</option>
+              <option value="Zi nelucratoare">Zi nelucratoare</option>
+            </select>
+          </td>
+          <td>
+            <ng-container *ngIf="day.isWorkingDay && day.parity">
+              {{ getParityDisplay(day.parity) }}
+            </ng-container>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="loading" class="text-center mt-3">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+</div>

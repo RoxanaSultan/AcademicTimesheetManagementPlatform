@@ -1,0 +1,168 @@
+/* Coloane mai înguste */
+.table th:nth-child(1),
+.table td:nth-child(1),
+.table th:nth-child(2),
+.table td:nth-child(2),
+.table th:nth-child(3),
+.table td:nth-child(3),
+.table th:nth-child(4),
+.table td:nth-child(4),
+.table th:nth-child(5),
+.table td:nth-child(5),
+.table th:nth-child(6),
+.table td:nth-child(6),
+.table th:nth-child(7),
+.table td:nth-child(7),
+.table th:nth-child(10),
+.table td:nth-child(10),
+.table th:nth-child(13),
+.table td:nth-child(13),
+.table th:nth-child(9),
+.table td:nth-child(9) {
+  min-width: 55px;  /* poți ajusta */
+  max-width: 55px;  /* opțional, să nu crească prea mult */
+  white-space: nowrap;
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+.table th:nth-child(12),
+.table td:nth-child(12){
+  min-width: 70px;  /* poți ajusta */
+  max-width: 70px;  /* opțional, să nu crească prea mult */
+  white-space: nowrap;
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+
+.orar-wrapper {
+  max-width: 1600px;
+  margin: 2rem auto;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 2rem;
+  overflow-x: auto;
+}
+
+.table th, .table td {
+  min-width: 120px;
+  white-space: nowrap;
+}
+
+
+.orar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.status {
+  font-weight: 600;
+  color: #ff4d4f;
+}
+
+.status.validated {
+  color: #52c41a;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  background-color: #f9f9f9;
+}
+
+.table thead tr {
+  background-color: #fafafa;
+  border-bottom: 2px solid #e5e5e5;
+}
+
+
+.table input,
+.table select {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+.table tbody tr:hover {
+  background-color: #f1faff;
+}
+
+.table td button {
+  font-size: 0.85rem;
+  padding: 4px 8px;
+  margin: 0 2px;
+}
+
+button.btn-outline-primary {
+  border-color: #1890ff;
+  color: #1890ff;
+}
+
+button.btn-outline-primary:hover {
+  background-color: #1890ff;
+  color: #fff;
+}
+
+.editing-row input,
+.editing-row select {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid #d0d0d0;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  background-color: #ffffff;
+  box-sizing: border-box;
+}
+
+.editing-row {
+  background-color: #fffbe6 !important;
+  transition: background-color 0.3s ease;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+.editing-row button {
+  padding: 5px 10px;
+  font-size: 0.85rem;
+}
+
+.text-muted {
+  color: #6c757d;
+}
+
+.card-header h2 {
+  margin: 0;
+  color: #343a40;
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+button.btn {
+  font-size: 0.85rem;
+  padding: 0.35rem 0.75rem;
+}
+
+.btn-sm {
+  min-width: 80px;
+}
+
+.btn-primary, .btn-success, .btn-warning, .btn-secondary, .btn-danger {
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-primary:hover, 
+.btn-success:hover, 
+.btn-warning:hover, 
+.btn-secondary:hover, 
+.btn-danger:hover {
+  transform: scale(1.05);
+}
